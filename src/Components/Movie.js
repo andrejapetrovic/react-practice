@@ -2,19 +2,22 @@ import React from 'react';
 
 export default class Movie extends React.Component {
 	state = {
-		title: 'Fuck off'
+		title: 'Title'
 	}
 
 	changeHandler = (event) => {
-		this.setState({title: event.target.value});
+		event.preventDefault();
+		console.log(event.target.title);
+		this.setState({title: event.target.title.value});
 	}
 
 	render() {
 		return (
 			<div>
 				{this.state.title}
-			<form>
-				<input type="text" onChange={this.changeHandler}/>
+			<form onSubmit={this.changeHandler}>
+				<input type="text" defaultValue={this.state.title} name="title" />
+				<input type="submit" value="Submit" />
 			</form>
 			</div>
 		);
