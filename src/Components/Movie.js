@@ -4,17 +4,32 @@ export default class Movie extends React.Component {
 	state = {
 		title: 'Title',
 		genre: 'Genre',
-		description: 'Opis'
+		description: 'Opis',
+		price: 350,
+		releaseDate: "2020-11-02"
 	}
 
-	changeHandler = (event) => {
+	changeHandler = async (event) => {
 		event.preventDefault();
-		console.log(event.target.desc.value);
+
+		// const response = await fetch("https://")
+
 		this.setState({
 			title: event.target.title.value,
 			genre: event.target.genre.value,
 			description: event.target.desc.value,
+			price: event.target.price.value,
+			releaseDate: event.target.releaseDate.value
 		});
+	}
+
+	getTest = async (event) => {
+		fetch("https://localhost:44373/Movie/GetMovie",
+			{
+				method: "GET"
+			})
+			.then(res => res.json())
+			.then(res => console.log(res));
 	}
 
 	render() {
@@ -23,6 +38,8 @@ export default class Movie extends React.Component {
 				{this.state.title}
 				{this.state.genre}
 				{this.state.description}
+				{this.state.price}
+				{this.state.releaseDate}
 			<form onSubmit={this.changeHandler}>
 				<input type="text" defaultValue={this.state.title} name="title" />
 				<br />
@@ -35,8 +52,13 @@ export default class Movie extends React.Component {
 				<br />
 				<textarea name="desc" rows="10" cols="50" defaultValue={this.state.description}></textarea>
 				<br />
+				<input type="text" defaultValue={this.state.price} name="price" />
+				<br />
+				<input type="text" defaultValue={this.state.releaseDate} name="releaseDate" />
+				<br />
 				<input type="submit" value="Submit" />
 			</form>
+			<button onClick={this.getTest}>Get Test</button>
 			</div>
 		);
 	}
