@@ -7,7 +7,7 @@ export default class Info extends React.Component {
 	}
 
 	updateTitle = (e) => this.setState({...this.state, title: e.target.value})
-	updateSinger = (e) => this.setState({...this.state, title: e.target.value})
+	updateSinger = (e) => this.setState({...this.state, singer: e.target.value})
 
 	render() {
 		return (
